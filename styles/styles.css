@@ -36,6 +36,11 @@ img{
     margin: 0 auto;
 }
 
-.note{
-    color:red;
+figure {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.popular{
+    border: 4px dotted red;
 }
