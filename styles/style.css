@@ -1,10 +1,10 @@
-  body{
-    background-color: #ffffff;
+body{
+  background-image: linear-gradient(to bottom, #ffffff, #e9e4ff, #d5c9ff, #c0aeff, #ac93ff);
 }
 
-  .resume{
-    width: 40%;
-    height: 40%;
+.resume{
+  width: 40%;
+  height: 40%;
 }
 
   .head{
