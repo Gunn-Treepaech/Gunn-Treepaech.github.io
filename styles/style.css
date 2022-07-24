@@ -14,7 +14,7 @@ body{
 }
 
   form{
-    background-color: rgb(227, 231, 233);
+    background-color: #F1D6FE;
     width: 600px;
     text-align: left;
     border-radius: 5%;
@@ -61,7 +61,7 @@ body{
 }
 
   li a:hover:not(.active) {
-  background-color:yellow;
+  background-color:#C357F5;
   color: black;
 }
 
