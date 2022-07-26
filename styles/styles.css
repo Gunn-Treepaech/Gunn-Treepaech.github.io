@@ -2,6 +2,7 @@ html {
     font-size: 10px;
     font-family: 'Open Sans',sans-serif;
     background-color: #00539F;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -34,6 +35,8 @@ body {
 img{
     display: block;
     margin: 0 auto;
+    width: 100%;
+    height: auto;
 }
 
 figure {
@@ -43,4 +46,21 @@ figure {
 
 .popular{
     border: 4px dotted red;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 768px){
+    body{
+        width: auto;
+        height: auto;
+        text-size-adjust: auto;
+        box-sizing: border-box;
+        border: auto;
+    }
+    .popular{
+        box-sizing: border-box;
+    }
 }
