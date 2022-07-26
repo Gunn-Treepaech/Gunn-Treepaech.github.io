@@ -14,10 +14,6 @@ h1 {
     text-shadow: 3px 3px 1px black;
 }
 
-h3{
-    font-size: 20px;
-}
-
 p, li { 
     font-size: 16px;
     line-height: 2;
@@ -25,7 +21,7 @@ p, li {
 }
 
 body {
-    width: 600px;
+    width: 50%;
     margin: 0 auto;
     background-color: #FF9500;
     padding: 0 20px 20px 20px;
@@ -35,8 +31,8 @@ body {
 img{
     display: block;
     margin: 0 auto;
-    width: 100%;
-    height: auto;
+    width: 50%;
+    height: 100%;
 }
 
 figure {
@@ -54,13 +50,22 @@ figure {
 
 @media only screen and (max-width: 768px){
     body{
-        width: auto;
-        height: auto;
-        text-size-adjust: auto;
-        box-sizing: border-box;
-        border: auto;
+        width: 50%;
+        height: 100%;
     }
     .popular{
         box-sizing: border-box;
+        width: 100%;
+    }
+    h2{
+        font-size: 10px;
+    }
+    h1{
+        font-size: 38px;
+    }
+    p, li { 
+        font-size: 8px;
+        line-height: 2;
+        letter-spacing: 1;
     }
 }
