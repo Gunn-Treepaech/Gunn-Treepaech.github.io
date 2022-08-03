@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treepaech</title>
+    <style>
+        h1 {
+            font-size: 40px;
+        }
+        p{
+            font-size: 25px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="dataInput">
+        <script>
+            let userNum;
+            let numTure = 0;  
+            const primeNum = [];      
+
+            do {
+                userNum = prompt("Enter a positive integer");
+            } while (userNum < 0 || isNaN(userNum) || userNum % 1 != 0);
+
+            let msg = "For n = " + userNum + " prime numbers are ";
+            showPrimes(userNum)
+            function showPrimes(n){
+                for (let i = 2; i < n; i++){
+                    if (!isPrime(i)) continue;
+                    primeNum [numTure] = " " + String(i);
+                    numTure += 1;
+                }
+                alert(msg + primeNum);
+            }
+            function isPrime(n){
+                for (let i = 2; i < n; i++){
+                    if (n % i == 0) return false;
+                }
+                return true;
+            }
+        </script>
+    </div>
+    <div class="htmlcode">
+        <h2 style="text-align: center;">Prime Numbers Finder!</h2>
+        <h1>Write the web app to prompt accepting for a positive integer number</h1>
+        <br>
+        <ul>
+            <li><p>If the entered text is not a positive integer number, then the web app will keep asking for a number until the valid positive integer is entered</p></li>
+            <li><p>If the entered text is a positive integer, then the app will print prime numbers that are not greater than that given positive integer</p></li>
+        </ul>
+        <br>
+        <h1>Hint:</h1>
+        <br>
+        <p>1.you may want to use loop with label</p>
+        <p>2.you may want to use array with push function</p>
+    </div>
+</body>
+</html>
