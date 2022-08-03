@@ -50,7 +50,7 @@ figure {
 
 @media only screen and (max-width: 768px){
     body{
-        width: 50%;
+        width: 80%;
         height: 100%;
     }
     .popular{
@@ -61,7 +61,7 @@ figure {
         font-size: 10px;
     }
     h1{
-        font-size: 28px;
+        font-size: 36px;
     }
     p, li { 
         font-size: 8px;

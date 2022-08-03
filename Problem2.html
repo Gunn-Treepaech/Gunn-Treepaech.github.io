@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid19 Info and Stats in Thailand</title>
+    <style>
+       * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: Arial;
+          margin: 0;
+        }
+        
+        .header {
+          padding: 60px;
+          text-align: center;
+          background: #1abc9c;
+          color: white;
+        }
+        
+        .navbar {
+          display: flex;
+          background-color: #333;
+        }
+        
+        .navbar a {
+          color: white;
+          padding: 14px 20px;
+          text-decoration: none;
+          text-align: center;
+        }
+        
+        .navbar a:hover {
+          background-color: #ddd;
+          color: black;
+        }
+        
+        .row {  
+          display: flex;
+          flex-wrap: wrap;
+        }
+    
+        .side {
+          flex: 30%;
+          background-color: #f1f1f1;
+          padding: 20px;
+        }
+        
+        .main {
+          flex: 70%;
+          background-color: lemonchiffon;
+          padding: 20px;
+        }
+        
+        .imgs {
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+        }
+        
+        @media screen and (max-width: 700px) {
+          .row, .navbar {   
+            flex-direction: column;
+          }
+          .imgs {
+            flex-direction: column;
+        }
+        } 
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Covid Stats 2021</h1>
+    </div>
+    <div class="navbar">
+        <a href="#north">North</a>
+        <a href="#south">South</a>
+    </div>
+    <div class="row">
+        <div class="side">
+          <h2>DMHTT</h2>
+          <ul>
+            <li>D:Distancing</li>
+            <li>M:Mask wearing</li>
+            <li>H:Hand washing</li>
+            <li>T:Testing</li>
+            <li>T:Thai Chana</li>
+          </ul>   
+    </div>
+    <div class="main">
+      <section id="north">
+        <h2>Covid Stats in different regions</h2>
+        <h5>Stats on August 16,2021</h5>
+        <p>East and North, Central</p>
+        <div>
+            <ul class="imgs">
+                <li style="margin: 5px;"><img src="/images/east-north.jpg" alt="east-north"></li>
+                <li style="margin: 5px;"><img src="/images/central.jpg" alt="central"></li>
+            </ul>
+        </div>
+        <p>
+            At a time when Thailand is faced with a tough battle against COVID-19
+            and new variants, it’s more important than ever for health authorities
+            to relay important messages to the Thai and non-Thai population
+            – especially with the two million workers from neighbouring countries
+            including Cambodia, Laos, and Myanmar.
+            Health literacy plays a crucial role in helping to reduce transmission
+            and allows the public to understand how the virus spreads and know how
+            to protect themselves against it. The WHO and implementing partners
+            embarked on a project to translate a guide to COVID-19 vaccines
+            from Thai into English, Khmer, Lao, and Burmese.
+            This comprehensive guide provides details about the virus and its
+            variants as well as vaccines – the key to ending this pandemic.
+        </p>
+        <p>
+            A heartfelt “thank you” to all those involved in this ambitious yet highly
+            important mission. Please do your part by sharing information about this free
+            guide to your family and circle of friends and together,
+            we will reach the finish line with full knowledge about COVID-19.
+        </p>
+        <p>
+            Thai, English, Khmer, Lao, and Burmese versions are available for free download.
+        </p>
+        <br/><br/><br/><br/>
+        </section>
+        <section id="south">
+          <br/>
+          <p>
+            BANGKOK: Thailand could see coronavirus cases double to 45,000 per day by early next month, even with current lockdown measures in place, its COVID-19 task force said on Friday (Aug 13), as authorities urged people to stay home to reduce infection risks.
+            </p>
+            <p>
+            Thailand has been struggling with its worst outbreak so far, with a daily average of 20,000 new infections and 180 deaths in the past week, compared to 70 new cases and single-digit daily fatalities less than five months ago.
+            </p>
+            <p>
+            Current travel restrictions and containment measures in place over the past month have yet to make an impact, the task force said.
+            </p>
+            <p>
+            A record 23,418 new cases were announced on Friday, taking overall cases to 863,189, with 7,126 deaths.
+            </p>
+            <p>
+            "The lockdown has been 20 per cent effective but the infections continue to rise, projected to reach about 45,000 cases per day by the start of or mid-September," spokesman Taweesin Wisanuyothin told a news conference.
+            </p>
+          <div>
+            <ul class="imgs">
+              <li style="margin: 5px;"><img src="/images/west-south.jpg" alt="west-south"></li>
+              <li style="margin: 5px;"><img src="/images/northeast.jpg" alt="northeast"></li>
+            </ul>
+          </div>
+      </section>
+      </div>
+    </div>
+</body>
+</html>
