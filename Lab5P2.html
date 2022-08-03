@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numberUser;
+        const numBer = [], character = [];
+        let numIn = 0;
+        let sumIn = 0;
+        let maxNumber, minNumber;
+
+        do {
+            numberUser = prompt("Enter an integer (a negative integer to quit):");
+            (checkType(numberUser) || numberUser < 0 ? character[numIn] = numberUser:numBer[numIn] = parseInt(numberUser))
+            if (!checkType(numberUser)) {
+                if (parseInt(numberUser) >= 0){
+                    sumIn += parseInt(numberUser);
+                    numIn++
+                }
+            }
+        } while (numberUser >= 0 || isNaN(numberUser) == true);
+
+        maxNumber = Math.max();
+        minNumber = Math.min(numBer);
+
+        alert(sumIn);
+        alert(numBer);
+        alert(maxNumber);
+        alert(minNumber);
+        
+        function checkType(data){
+            if (isNaN(data)) return true;
+        }
+    </script>
+</body>
+</html>
