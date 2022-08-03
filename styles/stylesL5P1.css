@@ -3,4 +3,11 @@ h1 {
 }
 p{
     font-size: 25px; 
+}@media only screen and (max-width: 768px){
+    h1{
+        font-size: 35px;
+    }
+    p{
+        font-size: 20px;
+    }
 }
