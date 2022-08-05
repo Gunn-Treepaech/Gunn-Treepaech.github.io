@@ -12,7 +12,7 @@
         let maxNum, minNum;
 
         const list = readInput();
-        if (numIn != 0)  displayStats(list);
+        displayStats(list);
 
         function displayStats(listNum){
             if (numIn == 0){
@@ -59,7 +59,6 @@
                 numberUser = prompt("Enter an integer (a negative integer to quit):");
                 (checkType(numberUser) || numberUser < 0 ? character[numIn] = numberUser:numBer[numIn] = parseInt(numberUser));
                 if (Number(numberUser) < 0 && numIn == 0){
-                    displayStats(numBer);
                     break;
                 }
                 if (!checkType(numberUser))  numIn++;
