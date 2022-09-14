@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="uft-8"/>
+        <title>Treepaech Problem4 page</title>
+        <style>
+        .bar {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        li :not(.list){
+            float: left;
+        }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        li a:hover:not(.active) {
+            background-color:yellow;
+            color: black;
+        }
+        .active{
+            background-color: purple;
+        }
+        .frame1{
+            border: 4px solid blue;
+            background-color: skyblue;
+            width: 15%;
+            padding: 10px;
+            
+        }
+        .frame2{
+            border: 4px solid green;
+            background-color: lightgreen;
+            width: 15%;
+            padding: 10px;
+        }
+        </style>
+    </head>
+    <body>
+        <ul class="bar" style="list-style-type: none;">
+            <li><a class="active" href="#news">Unordered List</a></li>
+            <li><a href="#ordered-list">Ordered List</a></li>
+        </ul>
+    </body>
+    <body>
+        <Section id="news">
+            <p class="frame1">This is an unordered list:</p>
+            <ul style="list-style-type: circle" class="list">
+                <li>Coffee</li>
+                <li>Tea</li>
+                <li>Coca Cola</li>
+            </ul>
+         </Section>
+        <Section id="ordered-list">
+            <p class="frame2">This is an ordered list:</p>
+            <ol style="list-style-type: lower-roman;" class="list">
+                <li>Coffee</li>
+                <li>Tea</li>
+                <li>Coca Cola</li>
+            </ol>
+        </Section> 
+    </body>
+</html>

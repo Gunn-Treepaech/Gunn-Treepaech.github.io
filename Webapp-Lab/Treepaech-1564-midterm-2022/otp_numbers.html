@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treepaech Treechan 633040156-4</title>
+    <style>
+        .box{
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+        p {
+            margin: auto;
+            width: 100px;
+            border: 1px solid black;
+            background-color: aqua;
+            margin: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p>4</p>
+        <p>0</p>
+        <p>6</p>
+        <p>3</p>
+        <p>5</p>
+        <p>7</p>
+    </div>
+    <script>
+        const p = document.getElementsByTagName("p");
+        console.log(p);
+        function random(number) {
+            return Math.floor(Math.random() * number);
+        }
+        function bgChange() {
+            var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+            return rndCol;
+        }
+        for (let i = 0; i < p.length; i++) {
+            p[i].onclick = function (e) {
+                e.target.style.backgroundColor = bgChange();
+            }
+            p[i].ondblclick = function (e) {
+                e.target.innerHTML = random(9);
+            }
+        }
+    </script>
+</body>
+</html>

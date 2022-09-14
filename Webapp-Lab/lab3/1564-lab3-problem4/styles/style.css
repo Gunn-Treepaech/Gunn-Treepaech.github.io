@@ -1,0 +1,118 @@
+  body{
+  background-image: linear-gradient(to bottom, #ffffff, #e9e4ff, #d5c9ff, #c0aeff, #ac93ff);
+}
+
+  .resume{
+  width: 100%;
+  height: auto;
+}
+
+  .head{
+  font-style: italic;
+  font-size: 80px;
+  font-family: cursive;
+  text-shadow: #333;
+  box-shadow: inset;
+}
+
+  form{
+  background-color: #F1D6FE;
+  width: 50%;
+  text-align: left;
+  border-radius: 5%;
+  border-style: outset;
+  box-sizing: border-box;
+}
+
+  .tesxtfrom{
+  margin: 20px;
+  font-family: cursive;
+  box-sizing: border-box;
+}
+
+  .resume{
+  border-style: outset;
+  border-color: rgb(166, 169, 169);
+  border-width: 5px;
+  width: 45%;
+  height: 45%;
+}
+
+  h3{
+  font-family: cursive;
+  font-size: 30px;
+}
+
+  .contentCV{
+  margin: auto;
+  width: 100%;
+  padding: auto;
+  height: 50%;
+}
+  .contentProject{
+  font-family: cursive;
+  box-sizing: border-box;
+}
+
+  table, tr, td, th{
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+  .active{
+  background-color: purple;
+}
+
+  li a:hover:not(.active) {
+  background-color:#C357F5;
+  color: black;
+}
+
+  .bar {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+  li :not(.list){
+  float: left;
+}
+
+  li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: cursive;
+}
+
+input{
+  box-sizing: border-box;
+}
+
+textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px){
+  body{
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+}
+  .contentform{
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+  input :not(.bottons){
+  size: auto;
+  box-sizing: border-box;
+}
+}
