@@ -76,8 +76,8 @@ async function captureImage() {
   let prediction;
   if (isMobileDevice()) {
     const canvasElement = document.createElement("canvas");
-    canvasElement.width = 200;
-    canvasElement.height = 200;
+    canvasElement.width = 10;
+    canvasElement.height = 10;
     canvasElement
       .getContext("2d")
       .drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
@@ -90,6 +90,17 @@ async function captureImage() {
 
   clearResults();
   // หาค่าความน่าจะเป็นสูงสุดและเก็บดัชนีของมัน
+  
+  // Display the captured image in the <img> element with id "captured-image"
+  const capturedImageElement = document.getElementById("captured-image");
+  if (isMobileDevice()) {
+    // For mobile devices, set the image source from the canvas
+    capturedImageElement.src = canvasElement.toDataURL();
+  } else {
+    // For desktop, set the image source from the webcam
+    capturedImageElement.src = webcam.canvas.toDataURL();
+  }
+
   let maxProbability = 0;
   for (let i = 0; i < maxPredictions; i++) {
     if (prediction[i].probability > maxProbability) {
