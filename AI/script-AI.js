@@ -6,11 +6,9 @@ let videoElement;
 const URL = "https://teachablemachine.withgoogle.com/models/V_2rnQ1r_/";
 let model, webcam, labelContainer, maxPredictions;
 
-function isMobileDevice() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  );
-}
+window.onload = async function () {
+  await setupModelAndWebcam();
+};
 
 async function setupModelAndWebcam() {
   const modelURL = URL + "model.json";
@@ -31,30 +29,6 @@ async function setupModelAndWebcam() {
   }
 }
 
-if (isMobileDevice()) {
-  window.onload = async function () {
-    openMobileCamera();
-  };
-} else {
-  window.onload = async function () {
-    await setupModelAndWebcam();
-  };
-}
-
-async function openMobileCamera() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment" },
-    });
-    videoElement = document.createElement("video");
-    videoElement.srcObject = stream;
-    videoElement.play();
-    document.getElementById("webcam-container").appendChild(videoElement);
-  } catch (error) {
-    console.error("Error accessing mobile camera:", error);
-  }
-}
-
 async function loop() {
   webcam.update();
   window.requestAnimationFrame(loop);
@@ -69,38 +43,11 @@ function clearResults() {
 }
 
 async function captureImage() {
-  if (!model) {
-    // Model is not yet loaded, return and wait for setupModelAndWebcam to complete.
-    return;
-  }
-  let prediction;
-  if (isMobileDevice()) {
-    const canvasElement = document.createElement("canvas");
-    canvasElement.width = 10;
-    canvasElement.height = 10;
-    canvasElement
-      .getContext("2d")
-      .drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
-
-    prediction = await model.predict(canvasElement);
-    alert(prediction);
-  } else {
-    prediction = await model.predict(webcam.canvas);
-  }
+  let prediction = await model.predict(webcam.canvas);
 
   clearResults();
-  // หาค่าความน่าจะเป็นสูงสุดและเก็บดัชนีของมัน
-  
-  // Display the captured image in the <img> element with id "captured-image"
-  const capturedImageElement = document.getElementById("captured-image");
-  if (isMobileDevice()) {
-    // For mobile devices, set the image source from the canvas
-    capturedImageElement.src = canvasElement.toDataURL();
-  } else {
-    // For desktop, set the image source from the webcam
-    capturedImageElement.src = webcam.canvas.toDataURL();
-  }
 
+  // หาค่าความน่าจะเป็นสูงสุดและเก็บดัชนีของมัน
   let maxProbability = 0;
   for (let i = 0; i < maxPredictions; i++) {
     if (prediction[i].probability > maxProbability) {
@@ -119,8 +66,6 @@ async function captureImage() {
 
   // เก็บผลลัพธ์ทั้งหมดไว้ในตัวแปร global result
   result = prediction;
-  console.log(bestClassPrediction);
-  console.log(result);
 
   // เช็คเงื่อนไขและแสดง GIF ตามเงื่อนไขที่คุณต้องการ
   if (bestClassPrediction.includes("general waste")) {
