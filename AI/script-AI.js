@@ -69,6 +69,10 @@ function clearResults() {
 }
 
 async function captureImage() {
+  if (!model) {
+    // Model is not yet loaded, return and wait for setupModelAndWebcam to complete.
+    return;
+  }
   let prediction;
   if (isMobileDevice()) {
     const canvasElement = document.createElement("canvas");
