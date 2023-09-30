@@ -18,8 +18,26 @@
       </h1>
       <div id="webcam-container"></div>
       <div>
-        <button onclick="captureImage()" id="capture-button">Predict</button>
+        <button
+          onclick="captureImage()"
+          id="capture-button"
+          class="custom-upload-button"
+        >
+          Predict
+        </button>
+        <label for="upload-button" class="custom-upload-button">
+          Choose File
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          id="upload-button"
+          style="display: none"
+        />
       </div>
+      <button id="back-to-webcam-button" class="custom-upload-button">
+        Back to Webcam
+      </button>
       <div id="label-container"></div>
       <img id="gif-display" src="" />
     </div>

@@ -2,12 +2,20 @@
 let result = [];
 let bestPredictionIndex = 0;
 let bestClassPrediction;
-let videoElement;
+let isUploading = false;
 const URL = "https://teachablemachine.withgoogle.com/models/V_2rnQ1r_/";
 let model, webcam, labelContainer, maxPredictions;
 
 window.onload = async function () {
   await setupModelAndWebcam();
+
+  // เพิ่ม Event Listener สำหรับปุ่มอัพโหลดภาพ
+  const uploadButton = document.getElementById("upload-button");
+  uploadButton.addEventListener("change", handleUpload);
+
+  // เพิ่ม Event Listener สำหรับปุ่มกลับไปใช้กล้องเว็บแคม
+  const backToWebcamButton = document.getElementById("back-to-webcam-button");
+  backToWebcamButton.addEventListener("click", switchToWebcam);
 };
 
 async function setupModelAndWebcam() {
@@ -17,7 +25,7 @@ async function setupModelAndWebcam() {
   maxPredictions = model.getTotalClasses();
 
   const flip = true;
-  webcam = new tmImage.Webcam(200, 200, flip);
+  webcam = new tmImage.Webcam(300, 300, flip);
   await webcam.setup();
   await webcam.play();
   window.requestAnimationFrame(loop);
@@ -40,11 +48,56 @@ function clearResults() {
   for (let i = 0; i < 4; i++) {
     labelContainer.childNodes[i].innerHTML = ""; // ลบข้อความที่แสดงผลออก
   }
+  document.getElementById("gif-display").src = "";
 }
+
+async function handleUpload(event) {
+  const file = event.target.files[0];
+
+  if (file) {
+    isUploading = true;
+    // สร้าง FileReader เพื่ออ่านข้อมูลจากไฟล์ภาพ
+    const reader = new FileReader();
+
+    // เมื่ออ่านเสร็จสิ้น
+    reader.onload = async function () {
+      // แสดงภาพที่อัพโหลด
+      const imageElement = document.createElement("img");
+      imageElement.src = reader.result;
+      document.getElementById("webcam-container").innerHTML = ""; // เคลียร์ webcam container
+      document.getElementById("webcam-container").appendChild(imageElement);
+
+      // เรียกใช้งานฟังก์ชัน captureImage เพื่อทำการ prediction บนภาพที่อัพโหลด
+      await captureImage();
+    };
+
+    // อ่านไฟล์ภาพ
+    reader.readAsDataURL(file);
+  }
+}
+
+async function switchToWebcam() {
+  clearResults();
+  // ตรวจสอบสถานะการอัพโหลด
+  if (isUploading) {
+    // ถ้ากำลังอัพโหลด ให้ล้างการอัพโหลด
+    document.getElementById("upload-button").value = ""; // ล้างค่า input file
+    isUploading = false;
+  }
+  
+  // ปิดการแสดงภาพที่อัพโหลด
+  document.getElementById("webcam-container").innerHTML = "";
+  
+  // เรียกใช้งานกล้องเว็บแคมอีกครั้ง
+  await webcam.setup();
+  await webcam.play();
+  window.requestAnimationFrame(loop);
+  document.getElementById("webcam-container").appendChild(webcam.canvas);
+}
+
 
 async function captureImage() {
   let prediction = await model.predict(webcam.canvas);
-
   clearResults();
 
   // หาค่าความน่าจะเป็นสูงสุดและเก็บดัชนีของมัน
