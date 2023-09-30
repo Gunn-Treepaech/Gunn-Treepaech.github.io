@@ -71,13 +71,14 @@ async function captureImage() {
   let prediction;
   if (isMobileDevice()) {
     const canvasElement = document.createElement("canvas");
-    canvasElement.width = videoElement.videoWidth;
-    canvasElement.height = videoElement.videoHeight;
+    canvasElement.width = 200;
+    canvasElement.height = 200;
     canvasElement
       .getContext("2d")
       .drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
 
     prediction = await model.predict(canvasElement);
+    alert(prediction);
   } else {
     prediction = await model.predict(webcam.canvas);
   }
