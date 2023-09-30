@@ -2,6 +2,7 @@
 let result = [];
 let bestPredictionIndex = 0;
 let bestClassPrediction;
+let videoElement;
 const URL = "https://teachablemachine.withgoogle.com/models/V_2rnQ1r_/";
 let model, webcam, labelContainer, maxPredictions;
 
@@ -11,32 +12,32 @@ function isMobileDevice() {
   );
 }
 
+async function setupModelAndWebcam() {
+  const modelURL = URL + "model.json";
+  const metadataURL = URL + "metadata.json";
+  model = await tmImage.load(modelURL, metadataURL);
+  maxPredictions = model.getTotalClasses();
+
+  const flip = true;
+  webcam = new tmImage.Webcam(200, 200, flip);
+  await webcam.setup();
+  await webcam.play();
+  window.requestAnimationFrame(loop);
+
+  document.getElementById("webcam-container").appendChild(webcam.canvas);
+  labelContainer = document.getElementById("label-container");
+  for (let i = 0; i < maxPredictions; i++) {
+    labelContainer.appendChild(document.createElement("div"));
+  }
+}
+
 if (isMobileDevice()) {
   window.onload = async function () {
-    // ... โค้ดอื่น ๆ
     openMobileCamera();
   };
 } else {
-  // อุปกรณ์ไม่ใช่มือถือ (Desktop)
-  // ทำตามขั้นตอนที่เกี่ยวข้องกับการใช้ Webcam ปกติ
-  // ตามที่คุณมีในโค้ด JavaScript เดิม
   window.onload = async function () {
-    const modelURL = URL + "model.json";
-    const metadataURL = URL + "metadata.json";
-    model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
-
-    const flip = true;
-    webcam = new tmImage.Webcam(200, 200, flip);
-    await webcam.setup();
-    await webcam.play();
-    window.requestAnimationFrame(loop);
-
-    document.getElementById("webcam-container").appendChild(webcam.canvas);
-    labelContainer = document.getElementById("label-container");
-    for (let i = 0; i < maxPredictions; i++) {
-      labelContainer.appendChild(document.createElement("div"));
-    }
+    await setupModelAndWebcam();
   };
 }
 
@@ -45,7 +46,7 @@ async function openMobileCamera() {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: "environment" },
     });
-    const videoElement = document.createElement("video");
+    videoElement = document.createElement("video");
     videoElement.srcObject = stream;
     videoElement.play();
     document.getElementById("webcam-container").appendChild(videoElement);
