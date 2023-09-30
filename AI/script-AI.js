@@ -5,24 +5,54 @@ let bestClassPrediction;
 const URL = "https://teachablemachine.withgoogle.com/models/V_2rnQ1r_/";
 let model, webcam, labelContainer, maxPredictions;
 
-window.onload = async function () {
-  const modelURL = URL + "model.json";
-  const metadataURL = URL + "metadata.json";
-  model = await tmImage.load(modelURL, metadataURL);
-  maxPredictions = model.getTotalClasses();
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+}
 
-  const flip = true;
-  webcam = new tmImage.Webcam(200, 200, flip);
-  await webcam.setup();
-  await webcam.play();
-  window.requestAnimationFrame(loop);
+if (isMobileDevice()) {
+  window.onload = async function () {
+    // ... โค้ดอื่น ๆ
+    openMobileCamera();
+  };
+} else {
+  // อุปกรณ์ไม่ใช่มือถือ (Desktop)
+  // ทำตามขั้นตอนที่เกี่ยวข้องกับการใช้ Webcam ปกติ
+  // ตามที่คุณมีในโค้ด JavaScript เดิม
+  window.onload = async function () {
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+    model = await tmImage.load(modelURL, metadataURL);
+    maxPredictions = model.getTotalClasses();
 
-  document.getElementById("webcam-container").appendChild(webcam.canvas);
-  labelContainer = document.getElementById("label-container");
-  for (let i = 0; i < maxPredictions; i++) {
-    labelContainer.appendChild(document.createElement("div"));
+    const flip = true;
+    webcam = new tmImage.Webcam(200, 200, flip);
+    await webcam.setup();
+    await webcam.play();
+    window.requestAnimationFrame(loop);
+
+    document.getElementById("webcam-container").appendChild(webcam.canvas);
+    labelContainer = document.getElementById("label-container");
+    for (let i = 0; i < maxPredictions; i++) {
+      labelContainer.appendChild(document.createElement("div"));
+    }
+  };
+}
+
+async function openMobileCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
+    });
+    const videoElement = document.createElement("video");
+    videoElement.srcObject = stream;
+    videoElement.play();
+    document.getElementById("webcam-container").appendChild(videoElement);
+  } catch (error) {
+    console.error("Error accessing mobile camera:", error);
   }
-};
+}
 
 async function loop() {
   webcam.update();
@@ -38,7 +68,20 @@ function clearResults() {
 }
 
 async function captureImage() {
-  const prediction = await model.predict(webcam.canvas);
+  let prediction;
+  if (isMobileDevice()) {
+    const canvasElement = document.createElement("canvas");
+    canvasElement.width = videoElement.videoWidth;
+    canvasElement.height = videoElement.videoHeight;
+    canvasElement
+      .getContext("2d")
+      .drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+    prediction = await model.predict(canvasElement);
+  } else {
+    prediction = await model.predict(webcam.canvas);
+  }
+
   clearResults();
   // หาค่าความน่าจะเป็นสูงสุดและเก็บดัชนีของมัน
   let maxProbability = 0;
