@@ -64,6 +64,8 @@ async function handleUpload(event) {
       // แสดงภาพที่อัพโหลด
       const imageElement = document.createElement("img");
       imageElement.src = reader.result;
+      imageElement.height = 200;
+      imageElement.width = 200;
       document.getElementById("webcam-container").innerHTML = ""; // เคลียร์ webcam container
       document.getElementById("webcam-container").appendChild(imageElement);
 
@@ -84,17 +86,16 @@ async function switchToWebcam() {
     document.getElementById("upload-button").value = ""; // ล้างค่า input file
     isUploading = false;
   }
-  
+
   // ปิดการแสดงภาพที่อัพโหลด
   document.getElementById("webcam-container").innerHTML = "";
-  
+
   // เรียกใช้งานกล้องเว็บแคมอีกครั้ง
   await webcam.setup();
   await webcam.play();
   window.requestAnimationFrame(loop);
   document.getElementById("webcam-container").appendChild(webcam.canvas);
 }
-
 
 async function captureImage() {
   let prediction = await model.predict(webcam.canvas);
@@ -121,15 +122,20 @@ async function captureImage() {
   result = prediction;
 
   // เช็คเงื่อนไขและแสดง GIF ตามเงื่อนไขที่คุณต้องการ
+  const gifDisplay = document.getElementById("gif-display");
   if (bestClassPrediction.includes("general waste")) {
-    document.getElementById("gif-display").src =
-      "/AI/images/cherry-blossoms-6383_256.gif";
+    gifDisplay.src = "/AI/images/greenBin.gif";
+    gifDisplay.style.display = "block"; // แสดงกรอบ
   } else if (bestClassPrediction.includes("Hazardous waste")) {
-    document.getElementById("gif-display").src =
-      "/AI/images/halloween-7291_256.gif";
+    gifDisplay.src = "/AI/images/redBin.gif";
+    gifDisplay.style.display = "block"; // แสดงกรอบ
   } else if (bestClassPrediction.includes("recycled waste")) {
-    document.getElementById("gif-display").src = "/AI/images/sun-6751_256.gif";
+    gifDisplay.src = "/AI/images/yellowBin.gif";
+    gifDisplay.style.display = "block"; // แสดงกรอบ
   } else if (bestClassPrediction.includes("solid waste")) {
-    document.getElementById("gif-display").src = "/AI/images/rose-6870_256.gif";
+    gifDisplay.src = "/AI/images/blueBin.gif";
+    gifDisplay.style.display = "block"; // แสดงกรอบ
+  } else {
+    gifDisplay.style.display = "none"; // ซ่อนกรอบถ้าไม่มีภาพ GIF ที่ตรงเงื่อนไข
   }
 }

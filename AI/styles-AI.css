@@ -22,6 +22,24 @@ body {
   margin-top: 10px;
 }
 
+#gif-display {
+  width: 30%;
+  height: auto;
+}
+
+.result{
+  margin-top: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+#label-container{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
 .custom-upload-button {
   background-color: #007bff;
   color: #fff;
