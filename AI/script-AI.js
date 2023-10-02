@@ -3,7 +3,7 @@ let result = [];
 let bestPredictionIndex = 0;
 let bestClassPrediction;
 let isUploading = false;
-const URL = "https://teachablemachine.withgoogle.com/models/V_2rnQ1r_/";
+const URL = "https://teachablemachine.withgoogle.com/models/4Uz5-dAGK/";
 let model, webcam, labelContainer, maxPredictions;
 
 window.onload = async function () {
@@ -115,24 +115,31 @@ async function captureImage() {
     prediction[bestPredictionIndex].className +
     ": " +
     prediction[bestPredictionIndex].probability.toFixed(2);
-  labelContainer.childNodes[bestPredictionIndex].innerHTML =
-    bestClassPrediction;
+  // labelContainer.childNodes[bestPredictionIndex].innerHTML =
+  //   bestClassPrediction;
 
   // เก็บผลลัพธ์ทั้งหมดไว้ในตัวแปร global result
   result = prediction;
 
+  // แสดงผลลัพธ์ทั้งหมด
+  for (let i = 0; i < maxPredictions; i++) {
+    const classPrediction =
+      prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+    labelContainer.childNodes[i].innerHTML = classPrediction;
+  }
+
   // เช็คเงื่อนไขและแสดง GIF ตามเงื่อนไขที่คุณต้องการ
   const gifDisplay = document.getElementById("gif-display");
-  if (bestClassPrediction.includes("general waste")) {
+  if (bestClassPrediction.includes("general_waste")) {
     gifDisplay.src = "/AI/images/greenBin.gif";
     gifDisplay.style.display = "block"; // แสดงกรอบ
-  } else if (bestClassPrediction.includes("Hazardous waste")) {
+  } else if (bestClassPrediction.includes("Hazardous_waste")) {
     gifDisplay.src = "/AI/images/redBin.gif";
     gifDisplay.style.display = "block"; // แสดงกรอบ
-  } else if (bestClassPrediction.includes("recycled waste")) {
+  } else if (bestClassPrediction.includes("recycled_waste")) {
     gifDisplay.src = "/AI/images/yellowBin.gif";
     gifDisplay.style.display = "block"; // แสดงกรอบ
-  } else if (bestClassPrediction.includes("solid waste")) {
+  } else if (bestClassPrediction.includes("solid_waste")) {
     gifDisplay.src = "/AI/images/blueBin.gif";
     gifDisplay.style.display = "block"; // แสดงกรอบ
   } else {
