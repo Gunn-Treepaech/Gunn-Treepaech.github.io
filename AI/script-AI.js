@@ -64,8 +64,8 @@ async function handleUpload(event) {
       // แสดงภาพที่อัพโหลด
       const imageElement = document.createElement("img");
       imageElement.src = reader.result;
-      imageElement.height = 200;
-      imageElement.width = 200;
+      imageElement.height = 300;
+      imageElement.width = 300;
       document.getElementById("webcam-container").innerHTML = ""; // เคลียร์ webcam container
       document.getElementById("webcam-container").appendChild(imageElement);
 
@@ -115,18 +115,18 @@ async function captureImage() {
     prediction[bestPredictionIndex].className +
     ": " +
     prediction[bestPredictionIndex].probability.toFixed(2);
-  // labelContainer.childNodes[bestPredictionIndex].innerHTML =
-  //   bestClassPrediction;
+  labelContainer.childNodes[bestPredictionIndex].innerHTML =
+    bestClassPrediction;
 
   // เก็บผลลัพธ์ทั้งหมดไว้ในตัวแปร global result
   result = prediction;
 
   // แสดงผลลัพธ์ทั้งหมด
-  for (let i = 0; i < maxPredictions; i++) {
-    const classPrediction =
-      prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-    labelContainer.childNodes[i].innerHTML = classPrediction;
-  }
+  // for (let i = 0; i < maxPredictions; i++) {
+  //   const classPrediction =
+  //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+  //   labelContainer.childNodes[i].innerHTML = classPrediction;
+  // }
 
   // เช็คเงื่อนไขและแสดง GIF ตามเงื่อนไขที่คุณต้องการ
   const gifDisplay = document.getElementById("gif-display");
