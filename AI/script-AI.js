@@ -51,52 +51,6 @@ function clearResults() {
   document.getElementById("gif-display").src = "";
 }
 
-async function handleUpload(event) {
-  const file = event.target.files[0];
-
-  if (file) {
-    isUploading = true;
-    // สร้าง FileReader เพื่ออ่านข้อมูลจากไฟล์ภาพ
-    const reader = new FileReader();
-
-    // เมื่ออ่านเสร็จสิ้น
-    reader.onload = async function () {
-      // แสดงภาพที่อัพโหลด
-      const imageElement = document.createElement("img");
-      imageElement.src = reader.result;
-      imageElement.height = 300;
-      imageElement.width = 300;
-      document.getElementById("webcam-container").innerHTML = ""; // เคลียร์ webcam container
-      document.getElementById("webcam-container").appendChild(imageElement);
-
-      // เรียกใช้งานฟังก์ชัน captureImage เพื่อทำการ prediction บนภาพที่อัพโหลด
-      await captureImage();
-    };
-
-    // อ่านไฟล์ภาพ
-    reader.readAsDataURL(file);
-  }
-}
-
-async function switchToWebcam() {
-  clearResults();
-  // ตรวจสอบสถานะการอัพโหลด
-  if (isUploading) {
-    // ถ้ากำลังอัพโหลด ให้ล้างการอัพโหลด
-    document.getElementById("upload-button").value = ""; // ล้างค่า input file
-    isUploading = false;
-  }
-
-  // ปิดการแสดงภาพที่อัพโหลด
-  document.getElementById("webcam-container").innerHTML = "";
-
-  // เรียกใช้งานกล้องเว็บแคมอีกครั้ง
-  await webcam.setup();
-  await webcam.play();
-  window.requestAnimationFrame(loop);
-  document.getElementById("webcam-container").appendChild(webcam.canvas);
-}
-
 async function captureImage() {
   let prediction = await model.predict(webcam.canvas);
   clearResults();
