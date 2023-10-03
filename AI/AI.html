@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Garbage classification using AI</title>
     <link rel="stylesheet" href="/AI/styles-AI.css" />
     <!-- เชื่อมโยงไฟล์ CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
   <body>
     <div id="container">
-      <h1>
-        <span class="OYPEnA text-decoration-none text-strikethrough-none">
-          Garbage classification using AI<br />การจำแนกขยะโดยใช้ AI
-        </span>
-      </h1>
+      <div>
+        <h1>
+          <span class="OYPEnA text-decoration-none text-strikethrough-none">
+            Garbage classification using AI<br />การจำแนกขยะโดยใช้ AI
+          </span>
+        </h1>
+      </div>
+      <div class="head_txt">Webcam :</div>
       <div id="webcam-container"></div>
+      <div class="head_txt">ภาพที่อัพโหลด :</div>
+      <div><img id="imagePreview" style="height: 200px" /></div>
       <div>
         <button
           onclick="captureImage()"
@@ -25,10 +28,14 @@
         >
           Predict
         </button>
+        <input id="imageUpload" class="custom-upload-button" type="file" />
       </div>
-      <div class="result">Result : </div>
+      <button id="Clear-Results" class="custom-upload-button">
+        Clear Results
+      </button>
+      <div class="result">Result :</div>
       <div id="label-container"></div>
-      <img id="gif-display" src="">
+      <img id="gif-display" src="/AI/images/load.gif" />
     </div>
     <script src="/AI/script-AI.js"></script>
     <!-- เชื่อมโยงไฟล์ JavaScript -->

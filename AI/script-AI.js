@@ -2,20 +2,14 @@
 let result = [];
 let bestPredictionIndex = 0;
 let bestClassPrediction;
-let isUploading = false;
 const URL = "https://teachablemachine.withgoogle.com/models/4Uz5-dAGK/";
 let model, webcam, labelContainer, maxPredictions;
 
 window.onload = async function () {
   await setupModelAndWebcam();
 
-  // เพิ่ม Event Listener สำหรับปุ่มอัพโหลดภาพ
-  const uploadButton = document.getElementById("upload-button");
-  uploadButton.addEventListener("change", handleUpload);
-
-  // เพิ่ม Event Listener สำหรับปุ่มกลับไปใช้กล้องเว็บแคม
-  const backToWebcamButton = document.getElementById("back-to-webcam-button");
-  backToWebcamButton.addEventListener("click", switchToWebcam);
+  const backToWebcamButton = document.getElementById("Clear-Results");
+  backToWebcamButton.addEventListener("click", clearResults);
 };
 
 async function setupModelAndWebcam() {
@@ -48,11 +42,15 @@ function clearResults() {
   for (let i = 0; i < 4; i++) {
     labelContainer.childNodes[i].innerHTML = ""; // ลบข้อความที่แสดงผลออก
   }
-  document.getElementById("gif-display").src = "";
+  document.getElementById("gif-display").src = "/AI/images/load.gif";
 }
 
 async function captureImage() {
-  let prediction = await model.predict(webcam.canvas);
+  await predictImages(webcam.canvas);
+}
+
+async function predictImages(image) {
+  let prediction = await model.predict(image, false);
   clearResults();
 
   // หาค่าความน่าจะเป็นสูงสุดและเก็บดัชนีของมัน
@@ -75,13 +73,6 @@ async function captureImage() {
   // เก็บผลลัพธ์ทั้งหมดไว้ในตัวแปร global result
   result = prediction;
 
-  // แสดงผลลัพธ์ทั้งหมด
-  // for (let i = 0; i < maxPredictions; i++) {
-  //   const classPrediction =
-  //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-  //   labelContainer.childNodes[i].innerHTML = classPrediction;
-  // }
-
   // เช็คเงื่อนไขและแสดง GIF ตามเงื่อนไขที่คุณต้องการ
   const gifDisplay = document.getElementById("gif-display");
   if (bestClassPrediction.includes("general_waste")) {
@@ -100,3 +91,21 @@ async function captureImage() {
     gifDisplay.style.display = "none"; // ซ่อนกรอบถ้าไม่มีภาพ GIF ที่ตรงเงื่อนไข
   }
 }
+
+function readURL(input) {
+  if (input.files[0]) {
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      $("#imagePreview").attr("src", e.target.result);
+      // $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+      $("#imagePreview").hide();
+      $("#imagePreview").fadeIn(650);
+    };
+    reader.readAsDataURL(input.files[0]);
+    let image = document.getElementById("imagePreview");
+    predictImages(image);
+  }
+}
+$("#imageUpload").change(function () {
+  readURL(this);
+});

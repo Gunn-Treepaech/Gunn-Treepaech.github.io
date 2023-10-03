@@ -40,6 +40,13 @@ body {
   font-weight: 500;
 }
 
+.head_txt{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
+  font-weight: bold;
+  margin: 10px;
+}
+
 .custom-upload-button {
   background-color: #007bff;
   color: #fff;
