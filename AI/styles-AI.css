@@ -2,9 +2,17 @@
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+  overflow-y: scroll;
+}
+
+#container {
+  /* เพิ่มความสูงเพื่อให้มีขนาดพอดีกับหน้าจอ */
+  min-height: 100vh;
+  padding: 20px; /* สร้างเว้นระหว่างขอบหน้าจอและเนื้อหา */
+}
+
+#imageUpload[type="file"] {
+  display: none; /* ซ่อนอินพุตไฟล์ */
 }
 
 #container {
@@ -27,21 +35,21 @@ body {
   height: auto;
 }
 
-.result{
+.result {
   margin-top: 20px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-weight: bold;
 }
 
-#label-container{
-  font-family: 'Courier New', Courier, monospace;
+#label-container {
+  font-family: "Courier New", Courier, monospace;
   font-size: medium;
   margin-bottom: 15px;
   font-weight: 500;
 }
 
-.head_txt{
-  font-family: 'Courier New', Courier, monospace;
+.head_txt {
+  font-family: "Courier New", Courier, monospace;
   font-size: medium;
   font-weight: bold;
   margin: 10px;

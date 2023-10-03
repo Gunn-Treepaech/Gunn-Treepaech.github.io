@@ -12,6 +12,38 @@ window.onload = async function () {
   backToWebcamButton.addEventListener("click", clearResults);
 };
 
+// เมื่อคลิกที่ปุ่ม "Clear Results"
+document.getElementById("Clear-Results").addEventListener("click", function () {
+  // เลื่อนไปที่ส่วนบนสุดของหน้าเว็บ
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// เมื่อคลิกที่ปุ่มอัปโหลด
+document.getElementById("uploadButton").addEventListener("click", function () {
+  // เมื่อคลิกที่อินพุตไฟล์
+  document.getElementById("imageUpload").click();
+});
+
+// เมื่อมีการเลือกไฟล์
+document.getElementById("imageUpload").addEventListener("change", function () {
+  const fileInput = document.getElementById("imageUpload");
+  const uploadButton = document.getElementById("uploadButton");
+});
+
+// เมื่อคลิกที่ปุ่ม "Predict with Webcam"
+document
+  .getElementById("capture-button")
+  .addEventListener("click", function () {
+    // เลื่อนไปยังส่วน "Result"
+    document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+  });
+
+// เมื่อคลิกที่ปุ่ม "Upload Image"
+document.getElementById("uploadButton").addEventListener("click", function () {
+  // เลื่อนไปยังส่วน "Result"
+  document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+});
+
 async function setupModelAndWebcam() {
   const modelURL = URL + "model.json";
   const metadataURL = URL + "metadata.json";

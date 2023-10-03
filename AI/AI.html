@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>Garbage classification using AI</title>
     <link rel="stylesheet" href="/AI/styles-AI.css" />
@@ -9,6 +10,9 @@
   </head>
   <body>
     <div id="container">
+      <!-- ส่วนบนสุดของหน้าเว็บ (หัวเพจ) -->
+      <div id="top-of-page"></div>
+
       <div>
         <h1>
           <span class="OYPEnA text-decoration-none text-strikethrough-none">
@@ -26,14 +30,17 @@
           id="capture-button"
           class="custom-upload-button"
         >
-          Predict
+          Predict with Webcam
         </button>
-        <input id="imageUpload" class="custom-upload-button" type="file" />
+        <input id="imageUpload" type="file" style="display: none" />
+        <button id="uploadButton" class="custom-upload-button">
+          Upload Image
+        </button>
+        <button id="Clear-Results" class="custom-upload-button">
+          Clear Results
+        </button>
       </div>
-      <button id="Clear-Results" class="custom-upload-button">
-        Clear Results
-      </button>
-      <div class="result">Result :</div>
+      <div id="result" class="result">Result :</div>
       <div id="label-container"></div>
       <img id="gif-display" src="/AI/images/load.gif" />
     </div>
