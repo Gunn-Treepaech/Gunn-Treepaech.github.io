@@ -3,10 +3,17 @@ let result = [];
 let bestPredictionIndex = 0;
 let bestClassPrediction;
 const URL = "https://teachablemachine.withgoogle.com/models/4Uz5-dAGK/";
+const modelURL = URL + "model.json";
+const metadataURL = URL + "metadata.json";
 let model, webcam, labelContainer, maxPredictions;
 
 window.onload = async function () {
-  await setupModelAndWebcam();
+  const flip = true;
+  webcam = new tmImage.Webcam(300, 300, flip);
+  await webcam.setup();
+  await webcam.play();
+  window.requestAnimationFrame(loop);
+  document.getElementById("webcam-container").appendChild(webcam.canvas);
 
   const backToWebcamButton = document.getElementById("Clear-Results");
   backToWebcamButton.addEventListener("click", clearResults);
@@ -44,19 +51,10 @@ document.getElementById("uploadButton").addEventListener("click", function () {
   document.getElementById("result").scrollIntoView({ behavior: "smooth" });
 });
 
-async function setupModelAndWebcam() {
-  const modelURL = URL + "model.json";
-  const metadataURL = URL + "metadata.json";
+async function setupModel() {
   model = await tmImage.load(modelURL, metadataURL);
   maxPredictions = model.getTotalClasses();
 
-  const flip = true;
-  webcam = new tmImage.Webcam(300, 300, flip);
-  await webcam.setup();
-  await webcam.play();
-  window.requestAnimationFrame(loop);
-
-  document.getElementById("webcam-container").appendChild(webcam.canvas);
   labelContainer = document.getElementById("label-container");
   for (let i = 0; i < maxPredictions; i++) {
     labelContainer.appendChild(document.createElement("div"));
@@ -82,8 +80,13 @@ async function captureImage() {
 }
 
 async function predictImages(image) {
+  // ลบผลลัพธ์เดิมที่แสดงใน labelContainer
+  if (labelContainer) {
+    clearResults();
+  }
+  //document.getElementById("gif-display").src = "/AI/images/load.gif";
+  await setupModel();
   let prediction = await model.predict(image, false);
-  clearResults();
 
   // หาค่าความน่าจะเป็นสูงสุดและเก็บดัชนีของมัน
   let maxProbability = 0;
